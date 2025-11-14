@@ -310,18 +310,20 @@ if __name__ == "__main__":
             recording = recording_bin
             recording_tmp = None
 
-        # create a sorting analyzer in binary_folder in scratch
-        # this prevents issues with shared memory sizes
+        # Persist the canonical recording next to the analyzer (relative path will be stable)
+        rec_persisted = recording.save_as(format="zarr",folder=postprocessing_output_folder / "recording")
+        
+        # Build the analyzer with the *persisted* recording as the canonical one
         sorting_analyzer = si.create_sorting_analyzer(
             sorting=sorting_deduplicated,
-            recording=recording,
+            recording=rec_persisted,                 # <- this is what the analyzer will remember
             format="binary_folder",
-            folder=scratch_folder / "tmp_analyzer",
+            folder=scratch_folder / "tmp_analyzer",  # temp workspace for compute
             sparse=True,
             return_scaled=postprocessing_params["return_scaled"],
-            sparsity=sorting_analyzer_dedup.sparsity
-        )
-
+            sparsity=sorting_analyzer_dedup.sparsity)
+        
+        # (Optional) still use the fast temp binary for compute only
         if recording_tmp is not None:
             logging.info(f"\tSetting temporary binary recording")
             sorting_analyzer.set_temporary_recording(recording_tmp)
