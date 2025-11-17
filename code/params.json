@@ -7,54 +7,56 @@
         "method": "radius",
         "radius_um": 100
     },
-    "duplicate_threshold": 0.9,
-    "return_scaled": true,
-    "random_spikes": {
-        "max_spikes_per_unit": 500,
-        "method": "uniform",
-        "margin_size": null,
-        "seed": null
-    },
-    "noise_levels": {
-        "num_chunks_per_segment": 20,
-        "chunk_size": 10000,
-        "seed": null
-    },
-    "waveforms": {
-        "ms_before": 3.0,
-        "ms_after": 4.0,
-        "dtype": null
-    },
-    "templates": {},
-    "spike_amplitudes": {
-        "peak_sign": "neg"
-    },
-    "template_similarity": {
-        "method": "l1"
-    },
-    "correlograms": {
-        "window_ms": 50.0,
-        "bin_ms": 1.0
-    },
-    "isi_histograms": {
-        "window_ms": 100.0,
-        "bin_ms": 5.0
-    },
-    "unit_locations": {
-        "method": "monopolar_triangulation"
-    },
-    "spike_locations": {
-        "method": "grid_convolution"
-    },
-    "template_metrics": {
-        "upsampling_factor": 10,
-        "sparsity": null,
-        "include_multi_channel_metrics": true
-    },
-    "principal_components": {
-        "n_components": 5,
-        "mode": "by_channel_local",
-        "whiten": true
+    "postprocessing": {
+        "duplicate_threshold": 0.9,
+	    "return_scaled": true,
+        "random_spikes": {
+            "max_spikes_per_unit": 500,
+            "method": "uniform",
+            "margin_size": null,
+            "seed": null
+        },
+        "noise_levels": {
+            "num_chunks_per_segment": 20,
+            "chunk_size": 10000,
+            "seed": null
+        },
+        "waveforms": {
+            "ms_before": 3.0,
+            "ms_after": 4.0,
+            "dtype": null
+        },
+        "templates": {},
+        "spike_amplitudes": {
+            "peak_sign": "neg"
+        },
+        "template_similarity": {
+            "method": "cosine_similarity"
+        },
+        "correlograms": {
+            "window_ms": 50.0,
+            "bin_ms": 1.0
+        },
+        "isi_histograms": {
+            "window_ms": 100.0,
+            "bin_ms": 5.0
+        },
+        "unit_locations": {
+            "method": "monopolar_triangulation"
+        },
+        "spike_locations": {
+            "method": "grid_convolution"
+        },
+        "template_metrics": {
+            "upsampling_factor": 10,
+            "sparsity": null,
+            "include_multi_channel_metrics": true
+        },
+        "principal_components": {
+            "n_components": 5,
+            "mode": "by_channel_local",
+            "whiten": true
+        }
     },
     "quality_metrics_names": [
         "num_spikes",
