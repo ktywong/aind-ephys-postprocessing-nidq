@@ -27,6 +27,7 @@ import spikeinterface.qualitymetrics as sqm
 import spikeinterface.curation as sc
 
 from spikeinterface.core.core_tools import check_json
+from spikeinterface.exporters import export_to_phy
 
 # AIND
 from aind_data_schema.core.processing import DataProcess
@@ -190,6 +191,7 @@ if __name__ == "__main__":
         logging.info(f"\tProcessing {recording_name}")
         postprocessing_output_process_json = results_folder / f"{data_process_prefix}_{recording_name}.json"
         postprocessing_output_folder = results_folder / f"postprocessed_{recording_name}.zarr"
+        postprocessing_phy_folder = results_folder / f"postprocessed_{recording_name}_phy"
 
         try:
             recording_bin = None
@@ -331,6 +333,9 @@ if __name__ == "__main__":
             format="zarr",
             folder=postprocessing_output_folder
         )
+
+        logging.info("\tSaving SortingAnalyzer to phy")
+        export_to_phy(sorting_analyzer=sorting_analyzer, output_folder=postprocessing_phy_folder)
 
         t_postprocessing_end = time.perf_counter()
         elapsed_time_postprocessing = np.round(t_postprocessing_end - t_postprocessing_start, 2)
