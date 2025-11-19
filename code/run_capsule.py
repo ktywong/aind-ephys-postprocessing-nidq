@@ -335,7 +335,7 @@ if __name__ == "__main__":
         )
 
         logging.info("\tSaving SortingAnalyzer to phy")
-        export_to_phy(sorting_analyzer=sorting_analyzer, output_folder=postprocessing_phy_folder, use_relative_pathbool=True, additional_properties = ["KSLabel"])
+        export_to_phy(sorting_analyzer=sorting_analyzer, output_folder=postprocessing_phy_folder, use_relative_path=True, additional_properties = ["KSLabel"])
 
         t_postprocessing_end = time.perf_counter()
         elapsed_time_postprocessing = np.round(t_postprocessing_end - t_postprocessing_start, 2)
